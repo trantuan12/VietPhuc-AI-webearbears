@@ -8,6 +8,7 @@ import {
   Shirt,
   Info,
   Check,
+  Compass,
 } from "lucide-react";
 import garmentsData from "@/data/garments.json" with { type: "json" };
 
@@ -17,6 +18,7 @@ interface HeaderProps {
   onOpenLookbook?: () => void;
   onOpenLibrary?: () => void;
   onOpenAbout?: () => void;
+  onOpenIntro?: () => void;
   activeNav?: string;
   onNavClick?: (nav: string) => void;
 }
@@ -27,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenLookbook,
   onOpenLibrary,
   onOpenAbout,
+  onOpenIntro,
   activeNav = "home",
   onNavClick,
 }) => {
@@ -140,6 +143,15 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Sparkles className="w-4 h-4 text-stone-500" />
             <span>Về dự án</span>
+          </button>
+
+          <button
+            onClick={() => onOpenIntro?.()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-stone-700 hover:text-[#E07A5F] hover:bg-[#E07A5F]/10 transition-all cursor-pointer group font-medium"
+            title="Trải nghiệm lại Cổng Di Sản Cinematic"
+          >
+            <Compass className="w-4 h-4 text-[#E07A5F] group-hover:rotate-45 transition-transform" />
+            <span>Cổng Di Sản</span>
           </button>
         </nav>
 

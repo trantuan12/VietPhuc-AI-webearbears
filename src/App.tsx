@@ -9,6 +9,7 @@ import { CultureGuardPanel } from "@/components/culture/CultureGuardPanel";
 import { LookbookExportModal } from "@/components/studio/LookbookExportModal";
 import { CompareModal } from "@/components/studio/CompareModal";
 import { HeritageLibraryModal } from "@/components/studio/HeritageLibraryModal";
+import { CinematicHeritageIntro } from "@/components/intro/CinematicHeritageIntro";
 import { TargetVisual, CulturalAnchor, ApprovedFact } from "@/types/culture";
 import { OutfitConfig } from "@/types/studio";
 
@@ -140,14 +141,30 @@ export default function App() {
   const [activeRightTab, setActiveRightTab] = useState<"stylist" | "guard">("stylist");
   const [gender, setGender] = useState<"female" | "male">("female");
 
+  // Cinematic Intro state: Luôn luôn hiển thị trang Intro đầu tiên khi load web
+  const [showIntro, setShowIntro] = useState<boolean>(true);
+
+  const handleFinishIntro = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-[#E07A5F]/20 selection:text-[#E07A5F]">
+    <div className="h-screen max-h-screen overflow-hidden bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-[#E07A5F]/20 selection:text-[#E07A5F] relative">
+      {/* Cinematic Heritage Intro Overlay */}
+      {showIntro && (
+        <CinematicHeritageIntro
+          onComplete={handleFinishIntro}
+          onSkip={handleFinishIntro}
+        />
+      )}
+
       {/* Header */}
       <Header
         garmentId={garmentId}
         onSelectGarment={setGarmentId}
         onOpenLookbook={() => setIsLookbookOpen(true)}
         onOpenLibrary={() => setIsLibraryOpen(true)}
+        onOpenIntro={() => setShowIntro(true)}
       />
 
       {/* Loading overlay */}
