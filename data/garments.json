@@ -1,0 +1,87 @@
+[
+  {
+    "id": "garment_nguthan_01",
+    "name": "Áo Ngũ Thân Lập Lĩnh (Tay Chẽn)",
+    "dynasty": "Triều Nguyễn (1744 - 1945)",
+    "description": "Biểu tượng y phục truyền thống với cấu trúc 5 thân, khuy cài bên phải tượng trưng cho Ngũ Thường và đạo lý làm người.",
+    "original_visual_config": {
+      "colors": { "body": "#1E3A8A", "collar": "#172554", "pants": "#FFFFFF", "inner": "#FFFFFF", "belt": "#1E3A8A" },
+      "default_accessories": ["head_khan_dong_01"]
+    },
+    "anchors": [
+      { "id": "ANCHOR_01", "name": "Cổ đứng và hàng khuy cài bên phải", "target_visual": "collar", "description": "Áo ngũ thân lập lĩnh có phần cổ đứng; hàng 5 cúc chạy theo vạt phải phía trước từ cổ xuống eo.", "verified": true, "source_ids": ["SRC_BTLS_01", "SRC_HUE_03"] },
+      { "id": "ANCHOR_02", "name": "Thân áo rộng, không chiết eo và đường tà lượn", "target_visual": "torso", "description": "Phom thân áo truyền thống buông rộng tự nhiên, không chiết eo bó sát; đường tà mở rộng và lượn cong về phía gấu.", "verified": true, "source_ids": ["SRC_BTLS_01", "SRC_VNP_02"] },
+      { "id": "ANCHOR_03", "name": "Cấu trúc năm thân biểu trưng Ngũ Thường", "target_visual": "torso", "description": "Áo cấu thành từ năm thân tượng trưng cho Nhân - Lễ - Nghĩa - Trí - Tín, bốn thân ngoài và thân thứ năm nằm kín đáo bên trong.", "verified": true, "source_ids": ["SRC_VNP_02", "SRC_HUE_03", "SRC_NNAM_04"] }
+    ],
+    "educational_facts": [
+      { "id": "FACT_01", "text": "Kỹ thuật dệt vải xưa chưa có khổ rộng như hiện đại, nên kỹ thuật ghép 5 thân nối vải là một phát minh cấu trúc tài tình của tiền nhân.", "verified": true, "source_ids": ["SRC_VNP_02", "SRC_NNAM_04"] },
+      { "id": "FACT_02", "text": "Áo ngũ thân gắn với cuộc cải cách y phục tại Đàng Trong năm 1744 của chúa Nguyễn Phúc Khoát và được vua Minh Mạng định chuẩn thành quốc phục.", "verified": true, "source_ids": ["SRC_VNP_02", "SRC_HUE_03"] },
+      { "id": "FACT_03", "text": "Năm hạt cúc áo ngũ thân tượng trưng cho đạo lý Ngũ Thường, thể hiện phong thái đĩnh đạc và cốt cách văn nhã của người Việt.", "verified": true, "source_ids": ["SRC_HUE_03", "SRC_VNP_02"] }
+    ],
+    "verified": true,
+    "source_ids": ["SRC_BTLS_01", "SRC_VNP_02", "SRC_HUE_03", "SRC_NNAM_04"]
+  },
+  {
+    "id": "garment_aodai_01",
+    "name": "Áo Dài Truyền Thống",
+    "dynasty": "Cận đại & Đương đại",
+    "description": "Quốc phục Việt Nam thướt tha với 2 tà trước sau buông rủ thanh lịch, tôn vinh nét đẹp uyển chuyển của người Việt qua nhiều thế hệ.",
+    "original_visual_config": {
+      "colors": { "body": "#DC2626", "collar": "#FFFFFF", "pants": "#FDE047", "inner": "#FFFFFF", "belt": "#B91C1C" },
+      "default_accessories": ["head_khan_dong_01"]
+    },
+    "anchors": [
+      { "id": "ANCHOR_AD_01", "name": "Cổ áo cao truyền thống (Cổ 2-3cm)", "target_visual": "collar", "description": "Cổ áo đứng kín đáo cao khoảng 2-3cm ôm nhẹ cổ, mang lại vẻ trang nhã, đoan trang.", "verified": true, "source_ids": ["SRC_HUE_03"] },
+      { "id": "ANCHOR_AD_02", "name": "Hai tà áo trước sau buông rủ dài quá gối", "target_visual": "torso", "description": "Thân áo xẻ tà hai bên hông từ eo trở xuống, tạo độ bay thướt tha khi di chuyển kết hợp cùng quần lụa ống rộng.", "verified": true, "source_ids": ["SRC_HUE_03", "SRC_BTLS_01"] },
+      { "id": "ANCHOR_AD_03", "name": "Phối cùng quần lụa dài chạm gót", "target_visual": "feet", "description": "Áo dài truyền thống luôn đi kèm quần lụa chạm gót để bảo đảm tính trang nhã và chuẩn mực lễ nghi.", "verified": true, "source_ids": ["SRC_HUE_03"] }
+    ],
+    "educational_facts": [
+      { "id": "FACT_AD_01", "text": "Áo dài hiện đại là bước phát triển tiếp nối từ áo ngũ thân, được họa sĩ Cát Tường (Lemur) và họa sĩ Lê Phổ cách tân vào thập niên 1930.", "verified": true, "source_ids": ["SRC_HUE_03"] },
+      { "id": "FACT_AD_02", "text": "Áo dài là biểu tượng gắn liền với đời sống học đường, kỷ yếu, lễ tết và ngoại giao quốc tế của văn hóa Việt Nam.", "verified": true, "source_ids": ["SRC_HUE_03", "SRC_BTLS_01"] }
+    ],
+    "verified": true,
+    "source_ids": ["SRC_BTLS_01", "SRC_HUE_03"]
+  },
+  {
+    "id": "garment_tuthan_01",
+    "name": "Áo Tứ Thân Bắc Bộ",
+    "dynasty": "Dân gian Bắc Bộ (Thời Lê - Nguyễn)",
+    "description": "Trang phục dân gian mộc mạc mà duyên dáng của phụ nữ đồng bằng Bắc Bộ, gắn liền với hát Quan họ và các lễ hội mùa xuân.",
+    "original_visual_config": {
+      "colors": { "body": "#78350F", "collar": "#D97706", "pants": "#0F172A", "inner": "#E11D48", "belt": "#0D9488" },
+      "default_accessories": ["head_khan_mo_qua_01"]
+    },
+    "anchors": [
+      { "id": "ANCHOR_TT_01", "name": "Bốn vạt áo tượng trưng Tứ thân phụ mẫu", "target_visual": "torso", "description": "Áo có hai vạt sau may liền thành sống lưng, hai vạt trước để buông hoặc thắt vạt trước bụng, tượng trưng cho bốn thân phụ mẫu (cha mẹ mình và cha mẹ chồng/vợ).", "verified": true, "source_ids": ["SRC_NNAM_04", "SRC_VNP_02"] },
+      { "id": "ANCHOR_TT_02", "name": "Yếm đào và dải thắt lưng lụa", "target_visual": "torso", "description": "Bên trong áo tứ thân mặc yếm đào (hoặc yếm trắng), thắt dải lưng xanh hoặc hồng rủ duyên dáng.", "verified": true, "source_ids": ["SRC_NNAM_04"] },
+      { "id": "ANCHOR_TT_03", "name": "Khăn mỏ quạ và nón quai thao", "target_visual": "head", "description": "Đầu vấn khăn mỏ quạ đen nhánh tạo hình búp sen, kết hợp nón quai thao khi trẩy hội.", "verified": true, "source_ids": ["SRC_NNAM_04"] }
+    ],
+    "educational_facts": [
+      { "id": "FACT_TT_01", "text": "Áo tứ thân phản ánh đức tính cần cù, giản dị và hiếu nghĩa sâu sắc của người phụ nữ nông thôn Bắc Bộ xưa.", "verified": true, "source_ids": ["SRC_NNAM_04"] },
+      { "id": "FACT_TT_02", "text": "Màu sắc truyền thống của áo tứ thân thường nhuộm từ vỏ cây đà, củ nâu mộc mạc, phối cùng yếm đỏ hoa đào tạo điểm nhấn tinh tế.", "verified": true, "source_ids": ["SRC_NNAM_04", "SRC_VNP_02"] }
+    ],
+    "verified": true,
+    "source_ids": ["SRC_NNAM_04", "SRC_VNP_02"]
+  },
+  {
+    "id": "garment_nhatbinh_01",
+    "name": "Áo Nhật Bình Cung Đình",
+    "dynasty": "Hoàng triều Nhà Nguyễn",
+    "description": "Lễ phục cao quý của Hoàng hậu, Công chúa và mệnh phụ triều Nguyễn với cổ áo hình chữ nhật viền dải ngũ sắc hoa văn phụng điểu tráng lệ.",
+    "original_visual_config": {
+      "colors": { "body": "#047857", "collar": "#F59E0B", "pants": "#FFFFFF", "inner": "#FDE047", "belt": "#DC2626" },
+      "default_accessories": ["head_khan_dong_01"]
+    },
+    "anchors": [
+      { "id": "ANCHOR_NB_01", "name": "Cổ áo chữ nhật bản to viền ngũ sắc", "target_visual": "collar", "description": "Cổ áo vắt ngang trước ngực tạo thành hình chữ nhật đặc trưng, dải cổ viền dệt thêu ngũ hành kim mộc thủy hỏa thổ.", "verified": true, "source_ids": ["SRC_NNAM_04", "SRC_HUE_03"] },
+      { "id": "ANCHOR_NB_02", "name": "Dải ngũ sắc nơi tay áo và vạt", "target_visual": "torso", "description": "Cửa tay áo có dải viền ngũ sắc (xanh, vàng, trắng, đỏ, lục) biểu tượng của quyền quý và chuẩn mực điển chế cung đình.", "verified": true, "source_ids": ["SRC_NNAM_04", "SRC_HUE_03"] },
+      { "id": "ANCHOR_NB_03", "name": "Cố định bằng dải trâm cài hoặc ngọc bội", "target_visual": "collar", "description": "Cổ áo Nhật Bình được giữ kín bằng cúc kim loại quý hoặc dải ngọc khảm xà cừ sang trọng.", "verified": true, "source_ids": ["SRC_HUE_03"] }
+    ],
+    "educational_facts": [
+      { "id": "FACT_NB_01", "text": "Màu sắc của áo Nhật Bình phản ánh chặt chẽ cấp bậc trong cung đình: Hoàng hậu mặc sắc vàng chính hoàng, Công chúa mặc đỏ xích đào, cung tần mặc lục hoặc tím.", "verified": true, "source_ids": ["SRC_NNAM_04", "SRC_HUE_03"] },
+      { "id": "FACT_NB_02", "text": "Sau thời Nguyễn, áo Nhật Bình trở thành áo cưới trang trọng của các cô dâu quyền quý xứ Huế và Nam Bộ.", "verified": true, "source_ids": ["SRC_HUE_03"] }
+    ],
+    "verified": true,
+    "source_ids": ["SRC_NNAM_04", "SRC_HUE_03"]
+  }
+]

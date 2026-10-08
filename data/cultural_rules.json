@@ -1,0 +1,64 @@
+[
+  {
+    "id": "RULE_01", "garment_id": "garment_nguthan_01", "evaluation_type": "deterministic", "score_dimension": "event_context", "importance": "medium", "target_visual": "collar", "anchor_id": "ANCHOR_01",
+    "penalties": { "caution": 0, "conflict": 10 },
+    "conditions": {
+      "applicable_events": ["event_ceremony", "event_grad"],
+      "forbidden_combinations": [
+        { "category": "headwear", "item_ids": ["head_cap_01"], "reason": "Trong nghi lễ trang trọng, phụ kiện đội đầu thể thao hiện đại xung đột với diện mạo tôn nghiêm của áo ngũ thân." }
+      ]
+    },
+    "verified": true, "source_ids": ["SRC_BTLS_01"],
+    "description": "Trong bối cảnh trang nghiêm, tránh dùng mũ thể thao phá cách làm mất tính tôn kính của lễ phục ngũ thân."
+  },
+  {
+    "id": "RULE_02", "garment_id": "garment_nguthan_01", "evaluation_type": "semantic", "score_dimension": "cultural_anchor", "importance": "critical", "target_visual": "torso", "anchor_id": "ANCHOR_03",
+    "penalties": { "caution": 15, "conflict": 50 },
+    "semantic_criteria": {
+      "caution_when": "Yêu cầu giản lược hoặc may giấu một phần thân thứ năm nhưng vẫn giữ nhận diện cấu trúc năm thân.",
+      "conflict_when": "Yêu cầu loại bỏ thân thứ năm, biến áo thành cấu trúc hai thân hoặc trực tiếp bỏ cấu trúc năm thân."
+    },
+    "verified": true, "source_ids": ["SRC_VNP_02", "SRC_HUE_03", "SRC_NNAM_04"],
+    "description": "Bảo toàn cấu trúc năm thân biểu trưng Ngũ Thường của mẫu áo ngũ thân."
+  },
+  {
+    "id": "RULE_03", "garment_id": "garment_nguthan_01", "evaluation_type": "semantic", "score_dimension": "cultural_anchor", "importance": "high", "target_visual": "torso", "anchor_id": "ANCHOR_02",
+    "penalties": { "caution": 10, "conflict": 25 },
+    "semantic_criteria": {
+      "caution_when": "Yêu cầu dùng đai/phụ kiện bên ngoài tạo độ ôm nhẹ nhưng không cắt sửa cấu trúc áo.",
+      "conflict_when": "Yêu cầu chiết eo bó sát mạnh hoặc cắt/rút tà thành áo ngắn ngang hông làm mất phom thân dài, rộng và tà lượn."
+    },
+    "verified": true, "source_ids": ["SRC_BTLS_01", "SRC_VNP_02"],
+    "description": "Bảo toàn phom thân rộng, không chiết eo và đường tà lượn của mẫu áo ngũ thân."
+  },
+  {
+    "id": "RULE_AD_01", "garment_id": "garment_aodai_01", "evaluation_type": "semantic", "score_dimension": "cultural_anchor", "importance": "critical", "target_visual": "torso", "anchor_id": "ANCHOR_AD_02",
+    "penalties": { "caution": 15, "conflict": 40 },
+    "semantic_criteria": {
+      "caution_when": "Yêu cầu rút ngắn nhẹ tà áo qua gối cho phong cách dạo phố năng động.",
+      "conflict_when": "Yêu cầu cắt ngắn tà áo trên đùi hoặc biến áo dài thành áo croptop làm mất bản sắc tà áo dài truyền thống."
+    },
+    "verified": true, "source_ids": ["SRC_HUE_03"],
+    "description": "Bảo tồn độ dài và sự thướt tha trang nhã của đôi tà áo dài truyền thống."
+  },
+  {
+    "id": "RULE_TT_01", "garment_id": "garment_tuthan_01", "evaluation_type": "semantic", "score_dimension": "cultural_anchor", "importance": "high", "target_visual": "torso", "anchor_id": "ANCHOR_TT_01",
+    "penalties": { "caution": 10, "conflict": 30 },
+    "semantic_criteria": {
+      "caution_when": "Yêu cầu biến tấu cách buộc vạt trước theo lối hiện đại nhưng giữ đủ 4 thân.",
+      "conflict_when": "Yêu cầu bỏ yếm đào bên trong hoặc may liền toàn bộ các thân làm mất đi đặc trưng 4 thân Tứ thân phụ mẫu."
+    },
+    "verified": true, "source_ids": ["SRC_NNAM_04"],
+    "description": "Bảo toàn cấu trúc bốn vạt và yếm đào của trang phục tứ thân dân gian."
+  },
+  {
+    "id": "RULE_NB_01", "garment_id": "garment_nhatbinh_01", "evaluation_type": "semantic", "score_dimension": "cultural_anchor", "importance": "critical", "target_visual": "collar", "anchor_id": "ANCHOR_NB_01",
+    "penalties": { "caution": 15, "conflict": 50 },
+    "semantic_criteria": {
+      "caution_when": "Yêu cầu cách điệu nhẹ họa tiết ngũ sắc trên viền cổ nhưng giữ nguyên phom cổ chữ nhật.",
+      "conflict_when": "Yêu cầu loại bỏ hoàn toàn dải viền ngũ sắc hoặc khoét cổ chữ V trễ ngực làm biến dạng nghiêm trọng y phục cung đình."
+    },
+    "verified": true, "source_ids": ["SRC_HUE_03", "SRC_NNAM_04"],
+    "description": "Giữ vững chuẩn mực viền cổ chữ nhật ngũ sắc trang nghiêm của lễ phục Nhật Bình."
+  }
+]

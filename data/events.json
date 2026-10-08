@@ -1,0 +1,5 @@
+[
+  { "id": "event_grad", "name": "Lễ tốt nghiệp / Kỷ yếu", "description": "Sự kiện học thuật trang trọng nhưng cởi mở với phong cách trẻ.", "allowed_remix_tiers": ["classic", "fusion"], "tier_mismatch_penalty": 10 },
+  { "id": "event_street", "name": "Dạo phố / Trưng bày nghệ thuật", "description": "Không gian tự do sáng tạo nghệ thuật cá nhân và streetwear.", "allowed_remix_tiers": ["classic", "fusion", "genz"], "tier_mismatch_penalty": 0 },
+  { "id": "event_ceremony", "name": "Nghi lễ thờ tự / Cưới hỏi", "description": "Nghi lễ truyền thống trang nghiêm đòi hỏi tính chuẩn mực cao nhất.", "allowed_remix_tiers": ["classic"], "tier_mismatch_penalty": 15 }
+]
