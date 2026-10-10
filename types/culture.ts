@@ -3,7 +3,7 @@ export type RuleImportance = "critical" | "high" | "medium" | "low";
 export type EvaluationType = "deterministic" | "semantic";
 export type EvaluationResult = "safe" | "caution" | "conflict" | "unknown";
 export type TargetVisual = "collar" | "torso" | "feet" | "head" | "bag";
-export type RemixTier = "classic" | "fusion" | "genz";
+export type RemixTier = "classic" | "fusion" | "genz" | "preserve" | "avant_garde";
 export type InventoryCategory = "headwear" | "footwear" | "bag";
 
 export interface Source {

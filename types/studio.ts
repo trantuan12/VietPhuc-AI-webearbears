@@ -9,6 +9,9 @@ export interface OutfitConfig {
     pants?: string;
     inner?: string;
     belt?: string;
+    sleeves?: string;
+    lining?: string;
+    sash?: string;
   };
   accessories: string[];
   motifs?: string[];

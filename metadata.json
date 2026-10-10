@@ -1,6 +1,6 @@
 {
-  "name": "Việt Phục Remix – Gen Z Fashion Studio | AI Cultural Stylist",
-  "description": "Nền tảng phối đồ Việt Phục đương đại kết hợp AI Cultural Stylist, 2.5D Fashion Avatar Studio, kiểm tra quy tắc di sản văn hóa và phối màu thông minh cho người trẻ.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "name": "Việt Phục Remix: AI GenZ Heritage Fashion Studio",
+  "description": "Nền tảng tương tác di sản thời trang Việt Nam kết hợp AI Stylist, mẫu avatar 2.5D, thẩm định di sản hoàng triều và sáng tạo lookbook thế hệ mới.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

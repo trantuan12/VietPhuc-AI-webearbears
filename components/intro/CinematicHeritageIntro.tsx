@@ -23,15 +23,23 @@ interface CinematicHeritageIntroProps {
   onSkip?: () => void;
 }
 
+interface HeritageStationTag {
+  label: string;
+  icon: string;
+}
+
 // Heritage Discovery Station definition
 interface HeritageStation {
   id: number;
   badge: string;
   title: string;
+  titleLine1: string;
+  titleLine2: string;
   description: string;
-  tags: string[];
+  tags: HeritageStationTag[];
   align: "left" | "right";
   heroImage: string;
+  subjectImage: string;
 }
 
 // 4 Heritage Discovery Stations configuration
@@ -40,43 +48,192 @@ const STATIONS: HeritageStation[] = [
     id: 1,
     badge: "01",
     title: "KHÁM PHÁ CỔ PHỤC VIỆT",
+    titleLine1: "Khám Phá",
+    titleLine2: "Cổ Phục Việt",
     description:
-      "Chiêm ngưỡng những dòng trang phục hoàng triều và dân gian Việt Nam, giải mã cấu trúc cổ phục và triết lý thẩm mỹ ngàn năm.",
-    tags: ["Nhật Bình", "Ngũ Thân", "Áo Dài", "Tứ Thân"],
+      "Tìm hiểu dòng trang phục truyền thống Việt Nam và khám phá câu chuyện văn hóa phía sau mỗi bộ cổ phục.",
+    tags: [
+      { label: "Nhật Bình", icon: "🌸" },
+      { label: "Ngũ Thân", icon: "🪭" },
+      { label: "Áo Dài", icon: "🏵️" },
+      { label: "Tứ Thân", icon: "🪷" },
+    ],
     align: "left",
     heroImage: "/images/intro/hero_station_1.jpg",
+    subjectImage: "/images/intro/subject_clean_1.png",
   },
   {
     id: 2,
     badge: "02",
-    title: "PHỐI ĐỒ CÙNG AI",
+    title: "PHỐI ĐỒ CÙNG AI STYLIST",
+    titleLine1: "Phối Đồ",
+    titleLine2: "Cùng AI Stylist",
     description:
-      "AI Stylist gợi ý phối cổ phục cùng phụ kiện đương đại, dung hòa di sản và nhịp sống trẻ.",
-    tags: ["Cổ Điển", "Giao Thoa", "Gen Z Streetwear"],
+      "AI Stylist gợi ý phối cổ phục cùng phụ kiện đương đại, dung hòa di sản và nhịp sống trẻ hiện đại.",
+    tags: [
+      { label: "Cổ Điển", icon: "🏛️" },
+      { label: "Giao Thoa", icon: "⚖️" },
+      { label: "Gen Z Look", icon: "⚡" },
+      { label: "Phụ Kiện", icon: "👟" },
+    ],
     align: "right",
     heroImage: "/images/intro/hero_station_2.jpg",
+    subjectImage: "/images/intro/subject_clean_2.png",
   },
   {
     id: 3,
     badge: "03",
-    title: "THẨM ĐỊNH DI SẢN",
+    title: "THẨM ĐỊNH DI SẢN HOÀNG TRIỀU",
+    titleLine1: "Thẩm Định",
+    titleLine2: "Di Sản Hoàng Triều",
     description:
-      "Soi từng đường kim mũi chỉ, cấu trúc cổ áo và đối chiếu sử liệu để giữ gìn tính xác thực văn hóa.",
-    tags: ["Cổ Chữ Nhật", "Chỉ Kim Tuyến", "Ngũ Sắc", "Sử Liệu"],
+      "Soi từng đường kim mũi chỉ kim tuyến, cấu trúc cổ áo và đối chiếu sử liệu để giữ gìn tính xác thực văn hóa.",
+    tags: [
+      { label: "Cổ Chữ Nhật", icon: "📐" },
+      { label: "Kim Tuyến", icon: "✨" },
+      { label: "Ngũ Sắc", icon: "🎨" },
+      { label: "Sử Liệu", icon: "📜" },
+    ],
     align: "left",
     heroImage: "/images/intro/hero_station_3.jpg",
+    subjectImage: "/images/intro/subject_clean_3.png",
   },
   {
     id: 4,
     badge: "04",
     title: "TẠO LOOKBOOK CỦA BẠN",
+    titleLine1: "Tạo Lookbook",
+    titleLine2: "Của Riêng Bạn",
     description:
-      "Lưu giữ và chia sẻ bản phối yêu thích thành những bộ ảnh thời trang nghệ thuật độc bản.",
-    tags: ["Dạo Phố", "Kỷ Yếu", "Lễ Hội", "Xuất Thẻ 4K"],
+      "Lưu giữ và chia sẻ bản phối yêu thích thành những bộ ảnh thời trang nghệ thuật độc bản chuẩn 4K.",
+    tags: [
+      { label: "Dạo Phố", icon: "📸" },
+      { label: "Kỷ Yếu", icon: "🎓" },
+      { label: "Lễ Hội", icon: "🏮" },
+      { label: "Thẻ 4K", icon: "💎" },
+    ],
     align: "right",
     heroImage: "/images/intro/hero_station_4.jpg",
+    subjectImage: "/images/intro/subject_clean_4.png",
   },
 ];
+
+
+interface HeritageBannerProps {
+  station: HeritageStation;
+  activeTagIdx: number;
+  onSelectTag: (idx: number) => void;
+}
+
+const HeritageBanner: React.FC<HeritageBannerProps> = ({
+  station,
+  activeTagIdx,
+  onSelectTag,
+}) => {
+  return (
+    <div
+      className="relative w-[480px] sm:w-[520px] md:w-[560px] max-w-[92vw] sm:max-w-[48vw] select-none pointer-events-auto transition-all duration-700"
+      style={{
+        filter:
+          "drop-shadow(0 24px 50px rgba(45,25,15,0.28)) drop-shadow(0 4px 14px rgba(212,175,55,0.18))",
+      }}
+    >
+      {/* 1. Luxurious Imperial Silk & Lacquer Stele Frame */}
+      <div className="relative w-full rounded-3xl bg-gradient-to-br from-[#FFFDF9]/98 via-[#FAF4EC]/96 to-[#F5ECE0]/98 backdrop-blur-xl border-2 border-[#D4AF37]/50 p-5 sm:p-6 overflow-hidden">
+        {/* Top Imperial Roof Crest Accent (Mái Vòm Hoàng Triều) */}
+        <div className="absolute top-0 inset-x-0 h-1.5 flex items-center justify-center">
+          <div className="w-32 h-1 rounded-full bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+        </div>
+
+        {/* Inner Fine Gold Hairline Stroke */}
+        <div className="absolute inset-1.5 rounded-[22px] border border-[#D4AF37]/25 pointer-events-none" />
+
+        {/* Đại Việt Cloud Filigree Watermark (Mờ ở góc) */}
+        <div className="absolute -bottom-2 -right-2 w-28 h-28 pointer-events-none opacity-10 text-[#8C2D19]">
+          <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
+            <path
+              d="M10 42 C10 30 20 20 32 20 C37 20 42 22 45 26 C49 24 54 26 56 31 C59 38 55 44 48 45 C41 46 35 42 35 37 C35 32 28 30 23 32 C17 35 17 42 22 46 C26 49 26 54 22 56 C17 59 10 50 10 42 Z"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            />
+          </svg>
+        </div>
+
+        {/* 2. Main Two-Column Layout */}
+        <div className="relative z-10 flex items-start justify-between gap-4 sm:gap-5">
+          {/* Left Column: Badge, Title, Description, Tags */}
+          <div className="flex-1 min-w-0 flex flex-col justify-between">
+            <div>
+              {/* Station Badge: Imperial Lacquer Crimson & Gold */}
+              <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#8C2D19] to-[#C06A45] text-white text-[11px] sm:text-xs font-mono font-black tracking-widest shadow-xs border border-amber-300/40">
+                  <span className="text-[#FEF08A] text-xs leading-none">✦</span>
+                  <span>TRẠM {station.badge}</span>
+                </div>
+                <span className="text-[#D4AF37] text-xs font-serif select-none">—</span>
+                <span className="text-[11px] font-bold text-[#8C2D19] uppercase tracking-wider">
+                  Việt Phục Gen Z
+                </span>
+              </div>
+
+              {/* Majestic Serif Heading */}
+              <h2
+                className="font-black text-xl sm:text-2xl md:text-[26px] text-[#421A10] leading-tight tracking-tight drop-shadow-2xs"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                {station.title}
+              </h2>
+
+              {/* Golden Hairline Divider */}
+              <div className="w-16 h-[1.5px] bg-gradient-to-r from-[#D4AF37] to-transparent my-2.5" />
+
+              {/* Crystal-clear Editorial Description */}
+              <p className="text-xs sm:text-[13px] text-[#4A3225] leading-relaxed font-normal">
+                {station.description}
+              </p>
+            </div>
+
+            {/* Bottom Row of Interactive Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-3.5 mt-3 border-t border-[#D4AF37]/25">
+              {station.tags.map((tag, tIdx) => {
+                const isActive = activeTagIdx === tIdx;
+                return (
+                  <button
+                    key={tag.label}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectTag(tIdx);
+                    }}
+                    className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-2xs ${
+                      isActive
+                        ? "bg-gradient-to-r from-[#8C2D19] to-[#C06A45] text-white border border-amber-300/50 scale-105 shadow-xs"
+                        : "bg-white/90 hover:bg-[#FFF4E8] text-[#5A382A] border border-[#D4AF37]/35 hover:border-[#8C2D19]/50 hover:scale-102"
+                    }`}
+                  >
+                    <span className="text-xs">{tag.icon}</span>
+                    <span>{tag.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Column: Arched Imperial Window with Artwork */}
+          <div className="w-[125px] sm:w-[140px] md:w-[155px] h-[175px] sm:h-[195px] md:h-[210px] rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 shadow-[0_8px_22px_rgba(54,37,29,0.18)] shrink-0 bg-gradient-to-b from-[#FFFDF8] to-[#F3E5D4] flex items-center justify-center p-1.5 self-center group">
+            <div className="w-full h-full rounded-xl overflow-hidden relative">
+              <img
+                src={station.heroImage || `/images/intro/portal_station_${station.id}.png`}
+                alt={station.title}
+                className="w-full h-full object-cover object-center transform group-hover:scale-108 transition-transform duration-700 select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const CinematicHeritageIntro: React.FC<CinematicHeritageIntroProps> = ({
   onComplete,
@@ -532,172 +689,50 @@ export const CinematicHeritageIntro: React.FC<CinematicHeritageIntroProps> = ({
       {phase === "traveling" && (
         <div className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-between p-4 sm:p-6 md:p-8">
           {/* Top spacer (đảm bảo thoáng phần header) */}
-          <div className="h-16" />
+          <div className="h-14 sm:h-16" />
 
           {/* KHÔNG GIAN TRIỂN LÃM: TRÁI / PHẢI LUÂN PHIÊN, GIỮA 45-50% HOÀN TOÀN TRỐNG */}
-          <div className="flex-1 flex items-center justify-between w-full max-w-[1440px] mx-auto px-2 sm:px-6 md:px-10 lg:px-14 pointer-events-none">
+          <div className="flex-1 flex items-center justify-between w-full max-w-[1500px] mx-auto px-2 sm:px-6 md:px-10 lg:px-12 pointer-events-none">
             {/* SLOT BÊN TRÁI (Trạm 01 & Trạm 03) */}
-            <div className="w-[360px] sm:w-[390px] max-w-[44vw] flex justify-start">
+            <div className="w-full max-w-[560px] flex justify-start">
               {currentStation.align === "left" && (
                 <div
                   key={`station-left-${currentStation.id}`}
-                  className="pointer-events-auto transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-7 duration-600"
-                  style={{
-                    filter:
-                      "drop-shadow(0 14px 32px rgba(54,37,29,0.16)) drop-shadow(0 2px 6px rgba(54,37,29,0.06))",
-                  }}
+                  className="pointer-events-auto transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-8 duration-700"
                 >
-                  {/* FLOATING HERITAGE PLAQUE (NHÃN TRIỂN LÃM GỖ & GẤM HIỆN ĐẠI) */}
-                  <div className="relative w-full rounded-2xl bg-[#FFF9F0] border border-[#D9684B]/35 p-5 sm:p-5.5 overflow-hidden">
-                    {/* Cạnh trên cong nhẹ như mái / biển hiệu truyền thống Việt Nam */}
-                    <div className="absolute top-0 left-0 right-0 h-1 flex items-center justify-center">
-                      <div className="w-24 h-0.5 rounded-full bg-[#D9684B]/40" />
-                    </div>
-
-                    {/* Motif mây cuộn Đại Việt rất mờ ở góc dưới phải */}
-                    <div className="absolute -bottom-1 -right-1 w-16 h-16 pointer-events-none opacity-15 text-[#D9684B]">
-                      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-                        <path
-                          d="M8 32 C8 23 15 16 24 16 C28 16 32 18 34 21 C37 19 41 20 42 24 C44 29 41 34 36 35 C31 36 26 33 26 29 C26 25 21 23 17 25 C13 27 13 32 17 35 C20 37 20 41 17 42 C13 45 8 38 8 32 Z"
-                          stroke="currentColor"
-                          strokeWidth="1.2"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Bố cục: Nội dung tinh giản bên trái, Thumbnail nhỏ ở cạnh phải */}
-                    <div className="relative z-10 flex items-start justify-between gap-3.5">
-                      <div className="flex-1 min-w-0">
-                        {/* Header: Số trạm + Dấu gạch gold + Tiêu đề chữ hoa */}
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-mono font-black text-xs sm:text-sm text-[#D9684B] tracking-wider">
-                            {currentStation.badge}
-                          </span>
-                          <span className="text-[#C89B52] text-xs font-serif select-none">—</span>
-                          <h3 className="font-black text-xs sm:text-[13px] text-[#36251D] tracking-wider uppercase truncate">
-                            {currentStation.title}
-                          </h3>
-                        </div>
-
-                        {/* Câu mô tả 2 dòng */}
-                        <p className="text-[11px] sm:text-xs text-[#5A453A] leading-relaxed mt-2 font-normal">
-                          {currentStation.description}
-                        </p>
-
-                        {/* Hàng nhãn nhỏ phân cách bởi dấu chấm gold */}
-                        <div className="flex flex-wrap items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-[#7A5848] mt-3.5 pt-2.5 border-t border-[#D9684B]/15">
-                          {currentStation.tags.map((tag, tIdx) => (
-                            <React.Fragment key={tIdx}>
-                              {tIdx > 0 && (
-                                <span className="text-[#C89B52] text-[9px] select-none">·</span>
-                              )}
-                              <span className="hover:text-[#D9684B] transition-colors">
-                                {tag}
-                              </span>
-                            </React.Fragment>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Thumbnail nhỏ ở cạnh phải */}
-                      <div className="w-[66px] h-[78px] sm:w-[72px] sm:h-[84px] rounded-xl overflow-hidden border border-[#D9684B]/25 shadow-xs shrink-0 bg-stone-100 self-center">
-                        <img
-                          src={currentStation.heroImage}
-                          alt={currentStation.title}
-                          className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <HeritageBanner
+                    station={currentStation}
+                    activeTagIdx={selectedGarmentIdx}
+                    onSelectTag={(idx) => setSelectedGarmentIdx(idx)}
+                  />
                 </div>
               )}
             </div>
 
             {/* VÙNG GIỮA TRỐNG HOÀN TOÀN (45-50% KHÔNG GIAN CỔNG & ĐƯỜNG ĐI DI SẢN) */}
-            <div className="flex-1 min-w-[200px] pointer-events-none" />
+            <div className="flex-1 min-w-[100px] pointer-events-none" />
 
             {/* SLOT BÊN PHẢI (Trạm 02 & Trạm 04) */}
-            <div className="w-[360px] sm:w-[390px] max-w-[44vw] flex justify-end">
+            <div className="w-full max-w-[560px] flex justify-end">
               {currentStation.align === "right" && (
                 <div
                   key={`station-right-${currentStation.id}`}
-                  className="pointer-events-auto transition-all duration-700 ease-out animate-in fade-in slide-in-from-right-7 duration-600"
-                  style={{
-                    filter:
-                      "drop-shadow(0 14px 32px rgba(54,37,29,0.16)) drop-shadow(0 2px 6px rgba(54,37,29,0.06))",
-                  }}
+                  className="pointer-events-auto transition-all duration-700 ease-out animate-in fade-in slide-in-from-right-8 duration-700"
                 >
-                  {/* FLOATING HERITAGE PLAQUE (NHÃN TRIỂN LÃM GỖ & GẤM HIỆN ĐẠI) */}
-                  <div className="relative w-full rounded-2xl bg-[#FFF9F0] border border-[#D9684B]/35 p-5 sm:p-5.5 overflow-hidden">
-                    {/* Cạnh trên cong nhẹ như mái / biển hiệu truyền thống Việt Nam */}
-                    <div className="absolute top-0 left-0 right-0 h-1 flex items-center justify-center">
-                      <div className="w-24 h-0.5 rounded-full bg-[#D9684B]/40" />
-                    </div>
-
-                    {/* Motif mây cuộn Đại Việt rất mờ ở góc dưới phải */}
-                    <div className="absolute -bottom-1 -right-1 w-16 h-16 pointer-events-none opacity-15 text-[#D9684B]">
-                      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-                        <path
-                          d="M8 32 C8 23 15 16 24 16 C28 16 32 18 34 21 C37 19 41 20 42 24 C44 29 41 34 36 35 C31 36 26 33 26 29 C26 25 21 23 17 25 C13 27 13 32 17 35 C20 37 20 41 17 42 C13 45 8 38 8 32 Z"
-                          stroke="currentColor"
-                          strokeWidth="1.2"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Bố cục: Nội dung tinh giản bên trái, Thumbnail nhỏ ở cạnh phải */}
-                    <div className="relative z-10 flex items-start justify-between gap-3.5">
-                      <div className="flex-1 min-w-0">
-                        {/* Header: Số trạm + Dấu gạch gold + Tiêu đề chữ hoa */}
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-mono font-black text-xs sm:text-sm text-[#D9684B] tracking-wider">
-                            {currentStation.badge}
-                          </span>
-                          <span className="text-[#C89B52] text-xs font-serif select-none">—</span>
-                          <h3 className="font-black text-xs sm:text-[13px] text-[#36251D] tracking-wider uppercase truncate">
-                            {currentStation.title}
-                          </h3>
-                        </div>
-
-                        {/* Câu mô tả 2 dòng */}
-                        <p className="text-[11px] sm:text-xs text-[#5A453A] leading-relaxed mt-2 font-normal">
-                          {currentStation.description}
-                        </p>
-
-                        {/* Hàng nhãn nhỏ phân cách bởi dấu chấm gold */}
-                        <div className="flex flex-wrap items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-[#7A5848] mt-3.5 pt-2.5 border-t border-[#D9684B]/15">
-                          {currentStation.tags.map((tag, tIdx) => (
-                            <React.Fragment key={tIdx}>
-                              {tIdx > 0 && (
-                                <span className="text-[#C89B52] text-[9px] select-none">·</span>
-                              )}
-                              <span className="hover:text-[#D9684B] transition-colors">
-                                {tag}
-                              </span>
-                            </React.Fragment>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Thumbnail nhỏ ở cạnh phải */}
-                      <div className="w-[66px] h-[78px] sm:w-[72px] sm:h-[84px] rounded-xl overflow-hidden border border-[#D9684B]/25 shadow-xs shrink-0 bg-stone-100 self-center">
-                        <img
-                          src={currentStation.heroImage}
-                          alt={currentStation.title}
-                          className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <HeritageBanner
+                    station={currentStation}
+                    activeTagIdx={selectedGarmentIdx}
+                    onSelectTag={(idx) => setSelectedGarmentIdx(idx)}
+                  />
                 </div>
               )}
             </div>
           </div>
 
-          {/* BỘ ĐIỀU HƯỚNG TỐI GIẢN Ở ĐÁY: ● ○ ○ ○   Tiếp tục → */}
-          <div className="flex flex-col items-center justify-center pb-4 sm:pb-6 pointer-events-auto gap-2">
-            <div className="flex items-center gap-4 px-5 py-2.5 rounded-full bg-[#FFF9F0]/92 backdrop-blur-md border border-[#D9684B]/25 shadow-[0_8px_24px_rgba(54,37,29,0.14)]">
-              {/* Dấu chấm tiến trình: ● ○ ○ ○ */}
+          {/* BỘ ĐIỀU HƯỚNG Ở ĐÁY: ● ○ ○ ○   Tiếp tục → */}
+          <div className="flex flex-col items-center justify-center pb-4 sm:pb-6 pointer-events-auto gap-2.5">
+            <div className="flex items-center gap-3.5 px-4 py-2 rounded-full bg-[#FFFDF9]/95 backdrop-blur-md border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(54,37,29,0.25)]">
+              {/* Dấu chấm tiến trình trong capsule */}
               <div className="flex items-center gap-2">
                 {STATIONS.map((_, i) => (
                   <button
@@ -705,19 +740,20 @@ export const CinematicHeritageIntro: React.FC<CinematicHeritageIntroProps> = ({
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveStationIndex(i);
+                      setSelectedGarmentIdx(0);
                       playStationChime(isMuted, i);
                     }}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                       i === activeStationIndex
-                        ? "w-6 bg-[#D9684B]"
-                        : "w-2 bg-[#D9684B]/30 hover:bg-[#D9684B]/55"
+                        ? "w-7 bg-gradient-to-r from-[#8C2D19] to-[#C06A45] shadow-xs"
+                        : "w-2.5 bg-[#D4AF37]/35 hover:bg-[#8C2D19]/50"
                     }`}
                     title={`Trạm 0${i + 1}`}
                   />
                 ))}
               </div>
 
-              <span className="text-[#C89B52] text-xs select-none">|</span>
+              <span className="text-[#D4AF37] text-xs select-none">|</span>
 
               {/* Nút bấm hành động: Tiếp tục → */}
               <button
@@ -725,18 +761,18 @@ export const CinematicHeritageIntro: React.FC<CinematicHeritageIntroProps> = ({
                   e.stopPropagation();
                   handleNextStation();
                 }}
-                className="flex items-center gap-1.5 text-xs font-bold text-[#36251D] hover:text-[#D9684B] transition-colors cursor-pointer group"
+                className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-[#8C2D19] via-[#B84E32] to-[#E07A5F] hover:from-[#781D22] hover:to-[#C06A45] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-[0_6px_20px_rgba(184,78,50,0.4)] hover:shadow-[0_8px_25px_rgba(184,78,50,0.55)] hover:scale-105 active:scale-95 transition-all cursor-pointer group border border-amber-200/40"
               >
                 <span>
                   {activeStationIndex === STATIONS.length - 1
                     ? "Bước Đến Đích"
                     : "Tiếp tục"}
                 </span>
-                <ChevronRight className="w-3.5 h-3.5 text-[#D9684B] group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
-            <div className="text-[11px] text-white/80 drop-shadow-md font-light">
+            <div className="text-xs text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-medium">
               Chạm bất kỳ đâu trên màn hình để tiếp tục hành trình
             </div>
           </div>

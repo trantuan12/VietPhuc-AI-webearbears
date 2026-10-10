@@ -60,27 +60,27 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   > = {
     garment_nguthan_01: {
       femaleName: "Áo Ngũ Thân",
-      maleName: "Áo Ngũ Thân",
+      maleName: "Áo Ngũ Thân Nam",
       femaleSub: "Triều Nguyễn",
       maleSub: "Triều Nguyễn",
     },
     garment_aodai_01: {
       femaleName: "Áo Dài",
-      maleName: "Áo Gấm",
-      femaleSub: "Cận đại & Đương đại",
-      maleSub: "Quan lại & Lễ nghi",
+      maleName: "Áo Gấm Cách Tân",
+      femaleSub: "Cận & Đương đại",
+      maleSub: "Quan lại Lễ nghi",
     },
     garment_tuthan_01: {
       femaleName: "Áo Tứ Thân",
-      maleName: "Áo Tứ Thân",
+      maleName: "Y Phục Liền Anh",
       femaleSub: "Dân gian Bắc Bộ",
-      maleSub: "Dân gian Bắc Bộ",
+      maleSub: "Liền Anh Quan Họ",
     },
     garment_nhatbinh_01: {
       femaleName: "Áo Nhật Bình",
-      maleName: "Áo Đại Cổ",
-      femaleSub: "Hoàng triều Nhà Nguyễn",
-      maleSub: "Nam giới truyền thống",
+      maleName: "Áo Đại Cổ Nam",
+      femaleSub: "Hoàng triều Nguyễn",
+      maleSub: "Hoàng tộc Nam giới",
     },
   };
 
@@ -115,23 +115,23 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   const maxPromptChars = 300;
 
   return (
-    <div className="flex flex-col gap-3.5 p-4 sm:p-4.5 rounded-3xl bg-white border border-stone-200/90 shadow-[0_8px_30px_rgb(0,0,0,0.04)] select-none text-stone-800">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+    <div className="flex flex-col gap-3 p-3.5 sm:p-4 rounded-3xl bg-white border border-stone-200/90 shadow-[0_8px_30px_rgb(0,0,0,0.04)] select-none text-stone-800">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         {/* ===================================================================
             1. CHỌN DÒNG CỔ PHỤC VIỆT (4 VISUAL CARDS)
         ==================================================================== */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <label className="text-xs font-black text-stone-900 tracking-wider uppercase flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E07A5F]" />
               <span>1. CHỌN DÒNG CỔ PHỤC VIỆT</span>
             </label>
           </div>
-          <p className="text-[11px] text-stone-500 font-normal">
+          <p className="text-[10.5px] text-stone-500 font-normal">
             Chọn trang phục truyền thống làm nền tảng phối đồ
           </p>
 
-          <div className="grid grid-cols-4 gap-2 pt-1">
+          <div className="grid grid-cols-4 gap-1.5 pt-0.5">
             {garments.map((g) => {
               const isSelected = g.id === garmentId;
               const meta = garmentDisplayData[g.id] || {
@@ -149,21 +149,21 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
                   type="button"
                   disabled={isLoading}
                   onClick={() => setGarmentId(g.id)}
-                  className={`flex flex-col items-center p-2 rounded-2xl border text-center transition-all cursor-pointer relative group ${
+                  className={`flex flex-col items-center p-1.5 sm:p-2 rounded-xl border text-center transition-all cursor-pointer relative group ${
                     isSelected
-                      ? "bg-[#E07A5F]/5 border-[#E07A5F] ring-1 ring-[#E07A5F] shadow-sm"
+                      ? "bg-[#E07A5F]/10 border-[#E07A5F] ring-1 ring-[#E07A5F] shadow-xs"
                       : "bg-white border-stone-200/90 hover:border-stone-300 hover:shadow-xs"
                   }`}
                 >
                   {/* Selected check badge */}
                   {isSelected && (
-                    <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[#E07A5F] flex items-center justify-center text-white shadow-2xs z-10">
-                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    <span className="absolute top-1 right-1 w-3.5 h-3.5 rounded-full bg-[#E07A5F] flex items-center justify-center text-white shadow-2xs z-10">
+                      <Check className="w-2 h-2 stroke-[3]" />
                     </span>
                   )}
 
                   {/* Model preview silhouette */}
-                  <div className="w-full h-22 rounded-xl overflow-hidden bg-gradient-to-b from-stone-50 to-stone-100/70 flex items-center justify-center relative my-1 p-1">
+                  <div className="w-full h-16 sm:h-18 rounded-lg overflow-hidden bg-gradient-to-b from-stone-50 to-stone-100/70 flex items-center justify-center relative my-0.5 p-0.5">
                     <div className="w-full h-full flex items-center justify-center pointer-events-none scale-90">
                       <AnimeFashionAvatar
                         gender={gender}
@@ -180,10 +180,10 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
                   </div>
 
                   {/* Garment Title & Subtitle */}
-                  <span className="text-[11px] font-bold text-stone-900 leading-snug truncate w-full mt-1">
+                  <span className="text-[10.5px] sm:text-[11px] font-bold text-stone-900 leading-tight w-full mt-1">
                     {title}
                   </span>
-                  <span className="text-[9.5px] text-stone-400 font-medium truncate w-full mt-0.5">
+                  <span className="text-[9px] sm:text-[9.5px] text-stone-500 font-medium leading-tight w-full mt-0.5 line-clamp-2">
                     {subtitle}
                   </span>
                 </button>
@@ -195,16 +195,16 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         {/* ===================================================================
             2. TẦNG PHỐI ĐỒ (REMIX TIER)
         ==================================================================== */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <label className="text-xs font-black text-stone-900 tracking-wider uppercase flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#E07A5F]" />
             <span>2. TẦNG PHỐI ĐỒ (REMIX TIER)</span>
           </label>
-          <p className="text-[11px] text-stone-500 font-normal">
+          <p className="text-[10.5px] text-stone-500 font-normal">
             Chọn mức độ kết hợp giữa truyền thống và đương đại
           </p>
 
-          <div className="grid grid-cols-3 gap-2 pt-1">
+          <div className="grid grid-cols-3 gap-1.5 pt-0.5">
             {[
               { id: "classic", label: "Cổ Điển", desc: "Nguyên bản", icon: Building2 },
               { id: "fusion", label: "Giao Thoa", desc: "Đương đại", icon: Scale },
@@ -218,7 +218,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
                   type="button"
                   disabled={isLoading}
                   onClick={() => setRemixTier(tier.id as any)}
-                  className={`flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all cursor-pointer relative ${
+                  className={`flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-xl border text-center transition-all cursor-pointer relative ${
                     isSelected
                       ? "bg-[#E07A5F]/10 border-[#E07A5F] ring-1 ring-[#E07A5F]/40 shadow-xs"
                       : "bg-stone-50/70 border-stone-200/80 hover:bg-stone-100 hover:border-stone-300"
@@ -226,23 +226,23 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
                 >
                   {/* Selected check badge */}
                   {isSelected && (
-                    <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 rounded-full bg-[#E07A5F] flex items-center justify-center text-white">
-                      <Check className="w-2 h-2 stroke-[3]" />
+                    <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-[#E07A5F] flex items-center justify-center text-white">
+                      <Check className="w-1.5 h-1.5 stroke-[3]" />
                     </span>
                   )}
                   <IconComp
-                    className={`w-4 h-4 mb-1 ${
+                    className={`w-3.5 h-3.5 mb-0.5 ${
                       isSelected ? "text-[#E07A5F]" : "text-stone-500"
                     }`}
                   />
                   <span
-                    className={`text-xs font-bold leading-tight ${
+                    className={`text-[11px] sm:text-xs font-bold leading-tight ${
                       isSelected ? "text-[#E07A5F]" : "text-stone-800"
                     }`}
                   >
                     {tier.label}
                   </span>
-                  <span className="text-[10px] text-stone-500 mt-0.5">
+                  <span className="text-[9.5px] text-stone-500 mt-0.5">
                     {tier.desc}
                   </span>
                 </button>
@@ -288,7 +288,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
           <div className="relative">
             <textarea
               id="fashion-prompt-input"
-              rows={3}
+              rows={2}
               maxLength={maxPromptChars}
               value={prompt}
               disabled={isLoading}

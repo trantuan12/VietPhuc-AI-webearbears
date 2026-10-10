@@ -607,9 +607,11 @@ export const InteractiveFashionAvatarStudio: React.FC<InteractiveFashionAvatarSt
       };
     }
     return {
-      name: "Áo Tứ Thân Bắc Bộ",
-      dynasty: "Dân gian Bắc Bộ (Thời Lê - Nguyễn)",
-      desc: "Trang phục dân gian mộc mạc mà duyên dáng của phụ nữ đồng bằng Bắc Bộ, gắn liền với hát Quan họ và các lễ hội mùa xuân.",
+      name: modelGender === "male" ? "Y Phục Liền Anh Quan Họ" : "Áo Tứ Thân Bắc Bộ",
+      dynasty: modelGender === "male" ? "Dân gian Bắc Bộ • Liền Anh Quan Họ" : "Dân gian Bắc Bộ (Thời Lê - Nguyễn)",
+      desc: modelGender === "male"
+        ? "Trang phục truyền thống của các liền anh quan họ Bắc Bộ với áo năm thân mộc mạc, dáng đứng nho nhã, hào hoa và chuẩn mực phong thái thanh lịch."
+        : "Trang phục dân gian mộc mạc mà duyên dáng của phụ nữ đồng bằng Bắc Bộ, gắn liền với hát Quan họ và các lễ hội mùa xuân.",
     };
   };
   const heritageInfo = getHeritageInfo();
@@ -1092,30 +1094,6 @@ export const InteractiveFashionAvatarStudio: React.FC<InteractiveFashionAvatarSt
             </div>
           )}
         </div>
-      </div>
-
-      {/* ===================================================================
-          7. BOTTOM-LEFT GLOWING X-RAY BADGE
-      ==================================================================== */}
-      <div className="absolute bottom-28 left-4 z-20 pointer-events-auto">
-        <button
-          onClick={() => setShowXRay(!showXRay)}
-          className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl backdrop-blur-md border transition-all shadow-lg cursor-pointer ${
-            showXRay
-              ? "bg-stone-900/85 text-emerald-300 border-emerald-500/50 shadow-emerald-950/40"
-              : "bg-white/90 text-stone-700 border-stone-200 shadow-stone-900/10"
-          }`}
-        >
-          <div className="relative">
-            <Scan className="w-4 h-4 text-emerald-400" />
-            {showXRay && (
-              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            )}
-          </div>
-          <span className="text-xs font-bold tracking-wide">
-            {showXRay ? "Bật Di Sản X-Ray" : "Tắt Di Sản X-Ray"}
-          </span>
-        </button>
       </div>
 
       {/* ===================================================================

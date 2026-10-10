@@ -13,7 +13,7 @@ import { CinematicHeritageIntro } from "@/components/intro/CinematicHeritageIntr
 import { TargetVisual, CulturalAnchor, ApprovedFact } from "@/types/culture";
 import { OutfitConfig } from "@/types/studio";
 
-import garmentsData from "@/data/garments.json" with { type: "json" };
+import garmentsData from "@/data/garments.json";
 import { filterVerifiedAnchors, filterVerifiedFacts } from "@/services/provenance";
 
 export default function App() {
@@ -137,16 +137,49 @@ export default function App() {
     setSavedCompareConfig({ ...currentOutfitConfig });
   };
 
+  // Tab state for narrow mobile viewports (< 768px)
+  const [mobileTab, setMobileTab] = useState<"avatar" | "controls">("avatar");
+
   // Right panel tab state
   const [activeRightTab, setActiveRightTab] = useState<"stylist" | "guard">("stylist");
   const [gender, setGender] = useState<"female" | "male">("female");
 
-  // Cinematic Intro state: Luôn luôn hiển thị trang Intro đầu tiên khi load web
-  const [showIntro, setShowIntro] = useState<boolean>(true);
+  // Cinematic Intro state: Studio is default on / and /dashbroad; Intro is shown on /intro or when triggered
+  const [showIntro, setShowIntro] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    const path = window.location.pathname.toLowerCase();
+    if (path === "/intro") {
+      return true;
+    }
+    return false;
+  });
 
   const handleFinishIntro = () => {
+    if (typeof window !== "undefined" && window.location.pathname !== "/dashbroad") {
+      window.history.pushState({}, "", "/dashbroad");
+    }
     setShowIntro(false);
   };
+
+  const handleOpenIntro = () => {
+    if (typeof window !== "undefined" && window.location.pathname !== "/intro") {
+      window.history.pushState({}, "", "/intro");
+    }
+    setShowIntro(true);
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      if (path.includes("dashbroad") || path.includes("dashboard")) {
+        setShowIntro(false);
+      } else if (path === "/" || path === "/intro") {
+        setShowIntro(true);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   return (
     <div className="h-screen max-h-screen overflow-hidden bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-[#E07A5F]/20 selection:text-[#E07A5F] relative">
@@ -164,7 +197,7 @@ export default function App() {
         onSelectGarment={setGarmentId}
         onOpenLookbook={() => setIsLookbookOpen(true)}
         onOpenLibrary={() => setIsLibraryOpen(true)}
-        onOpenIntro={() => setShowIntro(true)}
+        onOpenIntro={handleOpenIntro}
       />
 
       {/* Loading overlay */}
@@ -173,10 +206,40 @@ export default function App() {
       {/* Error banner */}
       <ErrorBanner error={error} onDismiss={() => setError(null)} />
 
-      {/* Main Studio Workspace: 2-column split layout (64% Left Studio : 36% Right AI Panel) */}
-      <main className="flex-1 min-h-0 max-w-[1780px] w-full mx-auto p-2 sm:p-3 flex flex-col lg:flex-row gap-3.5 h-[calc(100vh-68px)] overflow-hidden">
-        {/* KHỐI 1: KHỐI NGƯỜI MẪU CỐ ĐỊNH (64% Width) */}
-        <div className="w-full lg:w-[64%] h-full relative flex flex-col rounded-3xl overflow-hidden shadow-[0_12px_40px_rgb(0,0,0,0.06)] border border-stone-200/80 shrink-0">
+      {/* Mobile Tab Switcher (Only visible on narrow mobile screens < 768px) */}
+      <div className="flex md:hidden items-center justify-center px-3 py-1.5 bg-white/90 border-b border-stone-200/80 shrink-0">
+        <div className="flex p-0.5 bg-stone-100 rounded-xl w-full max-w-xs">
+          <button
+            onClick={() => setMobileTab("avatar")}
+            className={`flex-1 py-1 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer ${
+              mobileTab === "avatar"
+                ? "bg-white text-[#E07A5F] shadow-xs"
+                : "text-stone-500 hover:text-stone-800"
+            }`}
+          >
+            <span>👗 Người Mẫu 2.5D</span>
+          </button>
+          <button
+            onClick={() => setMobileTab("controls")}
+            className={`flex-1 py-1 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer ${
+              mobileTab === "controls"
+                ? "bg-white text-[#E07A5F] shadow-xs"
+                : "text-stone-500 hover:text-stone-800"
+            }`}
+          >
+            <span>✨ Bảng Tùy Chọn AI</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Studio Workspace: 2-column split layout (Side-by-side on >= 768px md) */}
+      <main className="flex-1 min-h-0 max-w-[1780px] w-full mx-auto p-2 sm:p-3 flex flex-col md:flex-row gap-3 h-[calc(100vh-68px)] overflow-hidden">
+        {/* KHỐI 1: KHỐI NGƯỜI MẪU CỐ ĐỊNH (58% on md, 62% on lg, 64% on xl) */}
+        <div
+          className={`w-full md:w-[58%] lg:w-[62%] xl:w-[64%] h-full relative flex-col rounded-3xl overflow-hidden shadow-[0_12px_40px_rgb(0,0,0,0.06)] border border-stone-200/80 shrink-0 ${
+            mobileTab === "avatar" ? "flex" : "hidden md:flex"
+          }`}
+        >
           <InteractiveFashionAvatarStudio
             garmentId={garmentId}
             outfitConfig={currentOutfitConfig}
@@ -199,13 +262,17 @@ export default function App() {
           />
         </div>
 
-        {/* KHỐI 2: KHỐI TÙY CHỌN & THẨM ĐỊNH ĐỘC LẬP (36% Width) */}
-        <div className="w-full lg:w-[36%] h-full flex flex-col gap-2.5 overflow-hidden">
+        {/* KHỐI 2: KHỐI TÙY CHỌN & THẨM ĐỊNH ĐỘC LẬP (42% on md, 38% on lg, 36% on xl) */}
+        <div
+          className={`w-full md:w-[42%] lg:w-[38%] xl:w-[36%] h-full flex-col gap-2.5 overflow-hidden ${
+            mobileTab === "controls" ? "flex" : "hidden md:flex"
+          }`}
+        >
           {/* Top Segmented Tab Switcher */}
           <div className="flex items-center p-1 rounded-2xl bg-white border border-stone-200/90 shadow-xs shrink-0">
             <button
               onClick={() => setActiveRightTab("stylist")}
-              className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 activeRightTab === "stylist"
                   ? "bg-gradient-to-r from-[#E07A5F] to-[#D96B4F] text-white shadow-sm font-black"
                   : "text-stone-500 hover:text-stone-800 hover:bg-stone-50"
@@ -216,7 +283,7 @@ export default function App() {
 
             <button
               onClick={() => setActiveRightTab("guard")}
-              className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer relative ${
+              className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer relative ${
                 activeRightTab === "guard"
                   ? "bg-gradient-to-r from-[#E07A5F] to-[#D96B4F] text-white shadow-sm font-black"
                   : "text-stone-500 hover:text-stone-800 hover:bg-stone-50"
@@ -225,11 +292,13 @@ export default function App() {
               <span className="text-blue-500">🛡️</span>
               <span>Thẩm Định Di Sản</span>
               {apiResponse?.cultural_evaluation?.score?.total != null && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-extrabold ${
-                  activeRightTab === "guard"
-                    ? "bg-white text-[#E07A5F]"
-                    : "bg-emerald-100 text-emerald-800"
-                }`}>
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-extrabold ${
+                    activeRightTab === "guard"
+                      ? "bg-white text-[#E07A5F]"
+                      : "bg-emerald-100 text-emerald-800"
+                  }`}
+                >
                   {apiResponse.cultural_evaluation.score.total}đ
                 </span>
               )}
@@ -237,7 +306,7 @@ export default function App() {
           </div>
 
           {/* Tab Content Container */}
-          <div className="flex-1 lg:overflow-y-auto pr-0 lg:pr-1 pb-4">
+          <div className="flex-1 overflow-y-auto pr-0 lg:pr-1 pb-4">
             {activeRightTab === "stylist" ? (
               <ControlPanel
                 garmentId={garmentId}
